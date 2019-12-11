@@ -1,7 +1,6 @@
 {
   "name": "authr",
   "version": "0.0.1",
-  "description": "",
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -59,9 +58,11 @@
     "mysql2": "^1.7.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-redux": "^7.1.3",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "reactstrap": "^8.0.1"
+    "reactstrap": "^8.0.1",
+    "redux": "^4.0.4"
   },
   "eslintIgnore": [
     "server/public/main.js"
@@ -117,5 +118,10 @@
       "react/react-in-jsx-scope": 0
     }
   },
-  "keywords": []
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/ssairafe/authr/issues"
+  },
+  "homepage": "https://github.com/ssairafe/authr#readme",
+  "description": ""
 }
