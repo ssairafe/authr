@@ -1,0 +1,121 @@
+{
+  "name": "authr",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "webpack-dev-server",
+    "start": "node .",
+    "build": "webpack --mode=production",
+    "dev": "npm-run-all --silent --parallel watch client",
+    "watch": "nodemon .",
+    "db-dump": ". ./.env; mysqldump -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE > database/$(date +%s)_dump.sql",
+    "db-import": ". ./.env; mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE <"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssairafe/authr.git"
+  },
+  "author": "Saria",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.2",
+    "@babel/core": "7.4.4",
+    "@babel/plugin-transform-react-jsx": "7.3.0",
+    "babel-eslint": "10.0.1",
+    "babel-loader": "8.0.6",
+    "eslint": "5.16.0",
+    "eslint-config-standard": "12.0.0",
+    "eslint-plugin-import": "2.17.2",
+    "eslint-plugin-node": "9.0.1",
+    "eslint-plugin-promise": "4.1.1",
+    "eslint-plugin-react": "7.13.0",
+    "eslint-plugin-standard": "4.0.0",
+    "husky": "2.2.0",
+    "lint-staged": "8.1.6",
+    "npm-run-all": "4.1.5",
+    "webpack": "4.31.0",
+    "webpack-cli": "3.3.2",
+    "webpack-dev-server": "3.3.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "mysql2": "^1.7.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "reactstrap": "^8.0.1"
+  },
+  "eslintIgnore": [
+    "server/public/main.js"
+  ],
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "plugin:react/recommended",
+      "eslint:recommended",
+      "standard"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "padded-blocks": 0,
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ],
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": 0
+    }
+  },
+  "keywords": []
+}
