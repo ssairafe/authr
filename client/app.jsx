@@ -1,29 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LandingPage from './landingPage';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      view: 'landingPage'
-    };
-    this.setView = this.setView.bind(this);
+export default function App() {
+  const [view, setView] = useState('landingPage');
+  if (view === 'landingPage') {
+    return <LandingPage changeView={setView} />;
   }
-
-  setView(view) {
-    this.setState({
-      view: view
-    });
+  if (view === 'startStory') {
+    return (
+      <div>
+        Start your story here
+        <button onClick={() => {
+          setView('landingPage');
+        }}>return</button>
+      </div>
+    );
   }
-
-  render() {
-    if (this.state.view === 'landingPage') {
-      return <LandingPage changeView={this.setView} />;
-    }
-    if (this.state.view === 'writersBlock') {
-      return (
-        <div>Writers Block</div>
-      );
-    }
+  if (view === 'addToStory') {
+    return (
+      <div>
+        This is a story.. add to it here
+        <button onClick={() => {
+          setView('landingPage');
+        }}>return</button>
+      </div>
+    );
   }
 }
