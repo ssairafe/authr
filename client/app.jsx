@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+// import axios from 'axios';
 import LandingPage from './landingPage';
 
 export default function App() {
   const [view, setView] = useState('landingPage');
+
   if (view === 'landingPage') {
     return <LandingPage changeView={setView} />;
   }
