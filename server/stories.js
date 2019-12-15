@@ -3,7 +3,7 @@ const connection = require('./connection');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-  connection.execute('SELECT * FROM `stories`', [req.params.id], (err, rows, fields) => {
+  connection.execute('SELECT * FROM `stories`', (err, rows, fields) => {
     console.log(rows);
     if (err) return next(err);
     if (rows[0] === undefined) {
