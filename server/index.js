@@ -2,12 +2,14 @@ require('dotenv/config');
 const path = require('path');
 const connection = require('./connection');
 const express = require('express');
+const stories = require('./stories');
 
 const server = express();
 let PORT = process.env.PORT;
 
 connection.connect();
 
+server.use('/api/stories', stories);
 server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
