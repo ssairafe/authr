@@ -3,6 +3,7 @@ const path = require('path');
 const connection = require('./connection');
 const express = require('express');
 const stories = require('./stories');
+const incompleteStories = require('./incompleteStories');
 
 const server = express();
 let PORT = process.env.PORT;
@@ -10,6 +11,7 @@ let PORT = process.env.PORT;
 connection.connect();
 
 server.use('/api/stories', stories);
+server.use('/api/incompleteStories', incompleteStories);
 server.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
