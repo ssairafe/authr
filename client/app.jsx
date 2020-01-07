@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
 import LandingPage from './landingPage';
+import StartStory from './startStory';
 
 export default function App() {
   const [view, setView] = useState('landingPage');
@@ -9,15 +10,9 @@ export default function App() {
     return <LandingPage changeView={setView} />;
   }
   if (view === 'startStory') {
-    return (
-      <div>
-        Start your story here
-        <button onClick={() => {
-          setView('landingPage');
-        }}>return</button>
-      </div>
-    );
+    return <StartStory changeView={setView} />;
   }
+
   if (view === 'addToStory') {
     return (
       <div>
