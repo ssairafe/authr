@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-export default function StartStory(props) {
+export default function AddToStory(props) {
   const [incompleteStory, setStory] = useState({});
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function StartStory(props) {
 
   return (
     <>
-      <div>start story page</div>
+      <div>`{incompleteStory + ''}`</div>
       <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
     </>
   );
