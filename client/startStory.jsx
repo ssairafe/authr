@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default function StartStory(props) {
   const [newStory, setStory] = useState({
@@ -10,6 +10,13 @@ export default function StartStory(props) {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    axios({
+      method: 'post',
+      url: '/api/stories',
+      data: {
+        newStory
+      }
+    });
   };
 
   return (
