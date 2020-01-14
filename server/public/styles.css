@@ -1,0 +1,14 @@
+.myNav {
+  top: 0px;
+  box-shadow: 0 1px 3px -2px;
+}
+
+.logoBox {
+  font-family: 'Dancing Script', cursive;
+  margin-left: 5%;
+  /* font-size: 45px; */
+}
+
+.logo {
+   color: rgb(41, 109, 41);
+}

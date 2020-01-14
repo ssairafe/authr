@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from './navbar';
 
 export default function LandingPage(props) {
   const [finishedStories, setStories] = useState([]);
@@ -21,18 +22,18 @@ export default function LandingPage(props) {
     return (
       <div key={story.storyID}>
         <h3>{story.title}</h3>
-        <ul>
-          <li>{story.creator}</li>
-          <li>{story.author1}</li>
-          <li>{story.author2}</li>
-          <li>{story.author3}</li>
-        </ul>
+        <div>
+          <h6>{story.author1 + ', ' + story.author2 + ', ' + story.author3 + ', ' + story.author4}</h6>
+        </div>
         <p>{story.part1 + ' ' + story.part2 + ' ' + story.part3 + ' ' + story.part4 + ' '}</p>
       </div>
     );
   });
 
   return (
+  <>
+  <Navbar/>
+  <div style={{ height: '130px' }}></div>
     <div className="container">
       <div className="row">
         <div className="col-3"></div>
@@ -49,5 +50,6 @@ export default function LandingPage(props) {
         </div>
       </div>
     </div>
+  </>
   );
 }
