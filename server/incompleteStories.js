@@ -15,4 +15,33 @@ router.get('/', jsonParser, (req, res, next) => {
   });
 });
 
+router.patch('/', jsonParser, (req, res, next) => {
+  let author = req.body.newAuthor;
+  let part = req.body.partToAdd;
+  let authorQuery = 'UPDATE `stories` SET ' + (author) + ' = ' + (`'${req.body.incompleteStory[author]}'`) + ' WHERE `stories`.`storyID` = ' + req.body.incompleteStory.storyID;
+  let partQuery = 'UPDATE `stories` SET ' + (part) + ' = ' + (`'${req.body.incompleteStory[part]}'`) + ' WHERE `stories`.`storyID` = ' + req.body.incompleteStory.storyID;
+  let completeStoryQuery = "UPDATE `stories` SET storyCompleted = '1' WHERE `stories`.`storyID` = " + req.body.incompleteStory.storyID;
+
+  connection.execute(authorQuery, (err, rows, fields) => {
+    if (err) {
+      return next(err);
+    }
+
+  });
+
+  connection.execute(partQuery, (err, rows, fields) => {
+    if (err) {
+      return next(err);
+    }
+
+    if (part === 'part4') {
+      connection.execute(completeStoryQuery, (err, rows, fields) => {
+        if (err) {
+          return next(err);
+        }
+      });
+    }
+  });
+});
+
 module.exports = router;

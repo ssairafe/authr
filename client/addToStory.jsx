@@ -43,15 +43,52 @@ export default function AddToStory(props) {
     }
   }
 
+  const handleSubmit = evt => {
+    evt.preventDefault();
+    axios({
+      method: 'patch',
+      url: '/api/incompleteStories',
+      data: {
+        incompleteStory,
+        partToAdd,
+        newAuthor
+      }
+    });
+  };
+
   if (partToAdd !== '' && newAuthor !== '') {
+    let part = partToAdd;
+    let author = newAuthor;
+
     return (
     <>
       <Navbar />
       <div style={{ height: '130px' }}></div>
-      <div>
-        Accepted story! You are {newAuthor} for {partToAdd}
-        <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
-      </div>
+        <div className="container">
+          <div className="row">
+            <form onSubmit={handleSubmit} id="form1">
+              <label>
+                Name:
+                <input
+                  type="text"
+                  defaultValue=""
+                  onChange={e => setStory({ ...incompleteStory, [author]: e.target.value })}
+                  placeholder={'First Last'}
+                />
+              </label>
+              <label>
+                Part
+                <textarea
+                  type="text"
+                  defaultValue=""
+                  onChange={e => setStory({ ...incompleteStory, [part]: e.target.value })}
+                />
+              </label>
+              <button type="submit" form="form1" value="Submit">Submit</button>
+            </form>
+          </div>
+          <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
+        </div>
       </>
     );
   } else {
