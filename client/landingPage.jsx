@@ -11,7 +11,7 @@ export default function LandingPage(props) {
         '/api/stories'
       );
       await setStories([
-        result.data
+        ...result.data
       ]);
     };
 
@@ -38,14 +38,17 @@ export default function LandingPage(props) {
       <div className="row">
         <div className="col-3"></div>
         <div className="col-6" style={{ textAlign: 'center' }}>
-          <button onClick={() => { props.changeView('startStory'); }}>Start Story</button>
-          <button onClick={() => { props.changeView('addToStory'); }}>Add to Story</button>
+          <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('startStory'); }}>Start Story</button>
+          <br></br>
+          <span id= 'homePageOr'>Or</span>
+          <br></br>
+          <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('addToStory'); }}>Add to Story</button>
         </div>
         <div className="col-3"></div>
       </div>
-      <div className="row">
+      <div className="row" id='finishedStoriesRow'>
         <div className="col-12">
-          <h1>Finished Stories</h1>
+          <h1 id='finishedStoriesHeader'>Finished Stories</h1>
           {finishedStoryElements}
         </div>
       </div>
