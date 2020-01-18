@@ -1,14 +1,34 @@
+/* font-family: 'Gelasio', serif; */
+
 .myNav {
   top: 0px;
   box-shadow: 0 1px 3px -2px;
+  color: rgb(41, 109, 41);
+  z-index: 1;
+  background-color: white;
 }
 
 .logoBox {
   font-family: 'Dancing Script', cursive;
   margin-left: 5%;
-  /* font-size: 45px; */
 }
 
 .logo {
    color: rgb(41, 109, 41);
+}
+
+
+
+#homePageOr {
+  font-size: 1.3rem;
+}
+
+#finishedStoriesRow {
+  margin-top: 6%;
+  margin-bottom: 5%;
+}
+
+#finishedStoriesHeader {
+  text-align: center;
+  font-family: 'Libre Baskerville', serif;
 }
