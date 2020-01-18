@@ -34,7 +34,8 @@ export default function AddToStory(props) {
   </div>;
 
   function acceptStory() {
-    for (let i = 0; i < 5; i++) {
+    let length = (Object.keys(incompleteStory).length - 3) / 2 + 1;
+    for (let i = 0; i < length; i++) {
       if (incompleteStory['author' + i] === '' && incompleteStory['part' + i] === '') {
         setPart('part' + i);
         setAuthor('author' + i);
@@ -84,10 +85,10 @@ export default function AddToStory(props) {
                   onChange={e => setStory({ ...incompleteStory, [part]: e.target.value })}
                 />
               </label>
-              <button type="submit" form="form1" value="Submit">Submit</button>
+              <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
             </form>
           </div>
-          <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
+          <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
         </div>
       </>
     );
@@ -97,9 +98,9 @@ export default function AddToStory(props) {
       <Navbar />
       <div style={{ height: '130px' }}></div>
       {incompleteStoryElement}
-      <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
-      <button onClick={() => { fetchData(); }}>Another Story</button>
-      <button onClick={() => { acceptStory(); }}>Accept Story</button>
+      <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
+      <button type="button" className="btn btn-outline-success" onClick={() => { fetchData(); }}>Another Story</button>
+      <button type="button" className="btn btn-outline-success" onClick={() => { acceptStory(); }}>Accept Story</button>
     </>
     );
   }
