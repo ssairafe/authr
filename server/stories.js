@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
     if (rows[0] === undefined) {
       res.send('No stories available');
     }
-    res.json(rows[0]);
+    res.json(rows);
   });
 });
 
