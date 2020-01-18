@@ -52,10 +52,10 @@ export default function StartStory(props) {
                 onChange={e => setStory({ ...newStory, part1: e.target.value })}
               />
             </label>
-            <button type="submit" form="form1" value="Submit">Submit</button>
+            <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
           </form>
         </div>
-        <button onClick={() => { props.changeView('landingPage'); }}>Home</button>
+        <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
       </div>
     </>
   );
