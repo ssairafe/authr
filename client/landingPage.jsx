@@ -20,12 +20,12 @@ export default function LandingPage(props) {
 
   let finishedStoryElements = finishedStories.map(story => {
     return (
-      <div key={story.storyID}>
-        <h3>{story.title}</h3>
-        <div>
-          <h6>{story.author1 + ', ' + story.author2 + ', ' + story.author3 + ', ' + story.author4}</h6>
+      <div className="card finishedStoryCard" key={story.storyID}>
+        <div className="card-body">
+          <h2 className="card-title">{story.title}</h2>
+          <p className="card-text"><small className="text-muted">By: {story.author1 + ', ' + story.author2 + ', ' + story.author3 + ', ' + story.author4}</small></p>
+          <p className="card-text finishedStoryPart ">{story.part1 }...</p>
         </div>
-        <p>{story.part1 + ' ' + story.part2 + ' ' + story.part3 + ' ' + story.part4 + ' '}</p>
       </div>
     );
   });

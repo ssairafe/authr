@@ -1,10 +1,22 @@
-/* font-family: 'Gelasio', serif; */
+/*  */
+.overflow-visible {
+  white-space: initial;
+}
+
+.overflow-clip {
+  text-overflow: clip;
+}
+
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+
 
 .myNav {
   top: 0px;
   box-shadow: 0 1px 3px -2px;
   color: rgb(41, 109, 41);
-  z-index: 1;
+  z-index: 2;
   background-color: white;
 }
 
@@ -15,6 +27,19 @@
 
 .logo {
    color: rgb(41, 109, 41);
+}
+.finishedStoryCard {
+  margin-bottom: 2%;
+  font-family: 'Gelasio', serif;
+  outline: 1px solid rgba(41,109,41,.325);
+  cursor: pointer;
+}
+.finishedStoryCard:hover{
+  outline: .18em solid rgba(41,109,41,.5);
+  z-index: 1;
+}
+.selectStoryButtons{
+  margin-right: .5%;
 }
 
 
@@ -31,4 +56,29 @@
 #finishedStoriesHeader {
   text-align: center;
   font-family: 'Libre Baskerville', serif;
+  margin-bottom: 5%;
+}
+#startStoryHeader {
+  text-align: center;
+  font-family: 'Libre Baskerville', serif;
+  margin-bottom: 5%;
+  font-size: 2rem;
+}
+#incompleteStoryBody > p {
+  font-family: 'Gelasio', serif !important;
+  font-size: 1.2rem !important;
+  text-align: left;
+}
+
+label {
+  display: block;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+textarea {
+  width: 100%;
+  height: 10rem;
 }
