@@ -26,36 +26,51 @@ export default function StartStory(props) {
       <div style={{ height: '130px' }}></div>
       <div className="container">
         <div className="row">
-          <form onSubmit={handleSubmit} id="form1">
-            <label>
-        Name:
-              <input
-                type="text"
-                defaultValue= ""
-                onChange={e => setStory({ ...newStory, author1: e.target.value })}
-                placeholder={'First Last'}
-              />
-            </label>
-            <label>
-        Title
-              <input
-                type="text"
-                defaultValue=""
-                onChange={e => setStory({ ...newStory, title: e.target.value })}
-              />
-            </label>
-            <label>
-        Part 1
-              <textarea
-                type="text"
-                defaultValue=""
-                onChange={e => setStory({ ...newStory, part1: e.target.value })}
-              />
-            </label>
-            <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
-          </form>
+          <div className="col-1">
+            <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
+          </div>
+          <div className="col-10" id="startStoryHeader"></div>
+          <div className="col-1"></div>
         </div>
-        <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
+        <div className="row">
+          <div className="col-1"></div>
+          <div className="col-10" id="startStoryHeader">Start Your Story</div>
+          <div className="col-1"></div>
+        </div>
+        <div className="row">
+          <div className="col-1"></div>
+          <div className="col-10">
+            <form onSubmit={handleSubmit} id="form1">
+              <label>
+                Name:
+                <input
+                  type="text"
+                  defaultValue=""
+                  onChange={e => setStory({ ...newStory, author1: e.target.value })}
+                  placeholder={'First-Name Last-Name'}
+                />
+              </label>
+              <label>
+                Title
+                <input
+                  type="text"
+                  defaultValue=""
+                  onChange={e => setStory({ ...newStory, title: e.target.value })}
+                />
+              </label>
+              <label>
+                Part
+                <textarea
+                  type="text"
+                  defaultValue=""
+                  onChange={e => setStory({ ...newStory, part1: e.target.value })}
+                />
+              </label>
+              <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
+            </form>
+          </div>
+          <div className="col-1"></div>
+        </div>
       </div>
     </>
   );
