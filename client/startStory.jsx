@@ -8,6 +8,7 @@ export default function StartStory(props) {
     author1: '',
     part1: ''
   });
+  const [modulOn, setModul] = useState(false);
 
   const handleSubmit = evt => {
     evt.preventDefault();
@@ -18,7 +19,25 @@ export default function StartStory(props) {
         newStory
       }
     });
+    setModul(true);
+    document.getElementById('form1').reset();
   };
+
+  const modul =
+      <div className="container-fluid" style={{ marginTop: '2%' }}>
+        <div className="row">
+          <div className="col-1"></div>
+          <div className="col-10">
+            <div className="alert alert-success" role="alert">
+              <h4 className="alert-heading">Well done!</h4>
+              <p>Your story has been submitted!</p>
+              <hr></hr>
+              <p>You can go back Home or start another story</p>
+            </div>
+          </div>
+          <div className="col-1"></div>
+        </div>
+      </div>;
 
   return (
     <>
@@ -29,6 +48,7 @@ export default function StartStory(props) {
           <div className="col-1">
             <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
           </div>
+          {modulOn ? modul : null}
           <div className="col-10" id="startStoryHeader"></div>
           <div className="col-1"></div>
         </div>
