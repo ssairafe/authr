@@ -38,6 +38,11 @@
   outline: .18em solid rgba(41,109,41,.5);
   z-index: 1;
 }
+.incompleteStoryCard {
+  margin-bottom: 2%;
+  font-family: 'Gelasio', serif;
+  outline: 1px solid rgba(41,109,41,.325);
+}
 .selectStoryButtons{
   margin-right: .5%;
 }
@@ -74,6 +79,11 @@
   font-size: 1.2rem !important;
   text-align: left;
 }
+#form1 {
+  margin-bottom: 3%;
+}
+
+
 
 label {
   display: block;
