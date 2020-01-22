@@ -6,8 +6,9 @@ const jsonParser = bodyParser.json();
 
 router.get('/', jsonParser, (req, res, next) => {
   connection.execute('SELECT * FROM `stories` WHERE stories.storyCompleted = false', (err, rows, fields) => {
-    if (err) return next(err);
-
+    if (err) {
+      return next(err);
+    }
     let randomStoryIndex = Math.floor(Math.random() * rows.length);
     res.json((rows[randomStoryIndex]));
   });
