@@ -6,6 +6,7 @@ export default function AddToStory(props) {
   const [incompleteStory, setStory] = useState({});
   const [partToAdd, setPart] = useState('');
   const [newAuthor, setAuthor] = useState('');
+  const [modulOn, setModul] = useState(false);
 
   const fetchData = async () => {
     const result = await axios(
@@ -21,14 +22,11 @@ export default function AddToStory(props) {
   }, []);
 
   let incompleteStoryElement =
-    <div className="card finishedStoryCard" key={incompleteStory.storyID}>
+    <div className="card incompleteStoryCard" key={incompleteStory.storyID}>
       <div className="card-body">
         <h2 className="card-title">{incompleteStory.title}</h2>
         <p className="card-text"><small className="text-muted">By: {incompleteStory.author1 + ', ' + incompleteStory.author2 + ', ' + incompleteStory.author3 + ', ' + incompleteStory.author4}</small></p>
         <p className="card-text finishedStoryPart ">{incompleteStory.part1}</p>
-        <p className="card-text finishedStoryPart ">{incompleteStory.part2}</p>
-        <p className="card-text finishedStoryPart ">{incompleteStory.part3}</p>
-        <p className="card-text finishedStoryPart ">{incompleteStory.part4}</p>
       </div>
     </div>;
 
@@ -43,6 +41,22 @@ export default function AddToStory(props) {
     }
   }
 
+  const modul =
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-1"></div>
+        <div className="col-10">
+          <div className="alert alert-success" role="alert">
+            <h4 className="alert-heading">Well done!</h4>
+            <p>Your part has been submitted!</p>
+            <hr></hr>
+            <p>You can select another story to add to, or go Home</p>
+          </div>
+        </div>
+        <div className="col-1"></div>
+      </div>
+    </div>;
+
   const handleSubmit = evt => {
     evt.preventDefault();
     axios({
@@ -54,6 +68,10 @@ export default function AddToStory(props) {
         newAuthor
       }
     });
+    setAuthor('');
+    setPart('');
+    fetchData();
+    setModul(true);
   };
 
   if (partToAdd !== '' && newAuthor !== '') {
@@ -88,7 +106,7 @@ export default function AddToStory(props) {
           <div className="row">
             <div className="col-1"></div>
             <div className="col-10">
-              <form onSubmit={handleSubmit} id="form1">
+              <form onSubmit={handleSubmit} id="form2">
                 <label>
                   Name:
                   <input
@@ -106,7 +124,7 @@ export default function AddToStory(props) {
                     onChange={e => setStory({ ...incompleteStory, [part]: e.target.value })}
                   />
                 </label>
-                <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
+                <button type="submit" className="btn btn-outline-success" form="form2" value="Submit">Submit</button>
               </form>
             </div>
             <div className="col-1"></div>
@@ -120,6 +138,7 @@ export default function AddToStory(props) {
       <Navbar />
       <div style={{ height: '130px' }}></div>
       <div className="container">
+        {modulOn ? modul : null}
         <div className="row" id='finishedStoriesRow'>
           <div className="col-12">
             <h1 id='finishedStoriesHeader'>Select a Story</h1>
