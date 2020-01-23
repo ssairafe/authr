@@ -9,9 +9,13 @@ export default function StartStory(props) {
     part1: ''
   });
   const [modulOn, setModul] = useState(false);
+  const [charactersRemaining, setCharachters] = useState(2500);
 
   const handleSubmit = evt => {
     evt.preventDefault();
+    if (newStory.part1.length < 1) {
+      return;
+    }
     axios({
       method: 'post',
       url: '/api/stories',
@@ -64,6 +68,7 @@ export default function StartStory(props) {
               <label>
                 Name:
                 <input
+                  minLength='6'
                   type="text"
                   defaultValue=""
                   onChange={e => setStory({ ...newStory, author1: e.target.value })}
@@ -73,6 +78,7 @@ export default function StartStory(props) {
               <label>
                 Title
                 <input
+                  minLength='3'
                   type="text"
                   defaultValue=""
                   onChange={e => setStory({ ...newStory, title: e.target.value })}
@@ -81,11 +87,17 @@ export default function StartStory(props) {
               <label>
                 Part
                 <textarea
+                  maxLength='2500'
+                  minLength='500'
                   type="text"
                   defaultValue=""
-                  onChange={e => setStory({ ...newStory, part1: e.target.value })}
+                  onChange={e => {
+                    setStory({ ...newStory, part1: e.target.value });
+                    setCharachters((2500 - newStory.part1.length) - 1);
+                  }}
                 />
               </label>
+              <p>Characters Remaining:{charactersRemaining}</p>
               <button type="submit" className="btn btn-outline-success" form="form1" value="Submit">Submit</button>
             </form>
           </div>

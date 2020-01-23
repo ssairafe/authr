@@ -7,6 +7,7 @@ export default function AddToStory(props) {
   const [partToAdd, setPart] = useState('');
   const [newAuthor, setAuthor] = useState('');
   const [modulOn, setModul] = useState(false);
+  const [charactersRemaining, setCharachters] = useState(2500);
 
   const fetchData = async () => {
     const result = await axios(
@@ -111,6 +112,7 @@ export default function AddToStory(props) {
                   Name:
                   <input
                     type="text"
+                    minLength='5'
                     defaultValue=""
                     onChange={e => setStory({ ...incompleteStory, [author]: e.target.value })}
                     placeholder={'First Last'}
@@ -119,11 +121,18 @@ export default function AddToStory(props) {
                 <label>
                   Part
                   <textarea
+                    maxLength='2500'
+                    minLength= '500'
                     type="text"
                     defaultValue=""
-                    onChange={e => setStory({ ...incompleteStory, [part]: e.target.value })}
+                    onChange={e => {
+                      setStory({ ...incompleteStory, [part]: e.target.value });
+                      setCharachters((2500 - incompleteStory[part].length) - 1);
+                    }
+                    }
                   />
                 </label>
+                <p>Characters Remaining:{charactersRemaining}</p>
                 <button type="submit" className="btn btn-outline-success" form="form2" value="Submit">Submit</button>
               </form>
             </div>
