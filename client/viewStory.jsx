@@ -1,10 +1,8 @@
 import React from 'react';
-import Navbar from './navbar';
 
 export default function ViewStory(props) {
   return (
     <>
-    <Navbar />
     <div style={{ height: '130px' }}></div>
     <div className="container">
       <button type="button" className="btn btn-outline-success" style={{ marginBottom: '2%' }} onClick={() => { props.changeView('landingPage'); }}>Home

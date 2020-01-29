@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function LandingPage(props) {
   const [finishedStories, setStories] = useState([]);
@@ -47,7 +46,6 @@ export default function LandingPage(props) {
 
   return (
       <>
-        <Navbar />
         <div style={{ height: '130px' }}></div>
         <div className="container">
           <div className="row">

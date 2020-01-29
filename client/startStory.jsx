@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function StartStory(props) {
   const [newStory, setStory] = useState({
@@ -45,7 +44,6 @@ export default function StartStory(props) {
 
   return (
     <>
-      <Navbar />
       <div style={{ height: '130px' }}></div>
       <div className="container">
         <div className="row">

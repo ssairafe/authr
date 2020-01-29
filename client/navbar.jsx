@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Navbar() {
+export default function Navbar(props) {
   return (
     <nav className="myNav navbar navbar-light bg-grey fixed-top" >
       <div className="logoBox navbar-brand" href="#">
@@ -8,6 +8,7 @@ export default function Navbar() {
           authr
         </h1>
       </div>
+      <button type="button" className="btn btn-outline-success align-right" onClick={() => { props.changeView('startStory'); }}>Enter A Class</button>
     </nav>
   );
 }

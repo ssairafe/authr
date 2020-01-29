@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function AddToStory(props) {
   const [incompleteStory, setStory] = useState({});
@@ -81,7 +80,6 @@ export default function AddToStory(props) {
 
     return (
     <>
-      <Navbar />
       <div style={{ height: '130px' }}></div>
         <div className="container">
           <div className="row">
@@ -144,7 +142,6 @@ export default function AddToStory(props) {
   } else {
     return (
     <>
-      <Navbar />
       <div style={{ height: '130px' }}></div>
       <div className="container">
         {modulOn ? modul : null}

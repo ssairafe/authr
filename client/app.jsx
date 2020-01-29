@@ -4,22 +4,43 @@ import LandingPage from './landingPage';
 import StartStory from './startStory';
 import AddToStory from './addToStory';
 import ViewStory from './viewStory';
+import Navbar from './navbar';
 
 export default function App() {
   const [view, setView] = useState('landingPage');
   const [storyToView, setViewStory] = useState({});
 
   if (view === 'viewStory') {
-    return <ViewStory story={storyToView} changeView={setView} />;
+    return (
+    <>
+      <Navbar changeView={setView} />
+      <ViewStory story={storyToView} changeView={setView} />
+    </>
+    );
   }
   if (view === 'landingPage') {
-    return <LandingPage setStory={setViewStory} changeView={setView} />;
+    return (
+    <>
+      <Navbar changeView={setView} />
+      <LandingPage setStory={setViewStory} changeView={setView} />
+    </>
+    );
   }
   if (view === 'startStory') {
-    return <StartStory changeView={setView} />;
+    return (
+    <>
+      <Navbar changeView={setView} />
+      <StartStory changeView={setView} />
+    </>
+    );
   }
 
   if (view === 'addToStory') {
-    return <AddToStory changeView={setView} />;
+    return (
+    <>
+      <Navbar changeView={setView} />
+      <AddToStory changeView={setView} />
+   </>
+    );
   }
 }
