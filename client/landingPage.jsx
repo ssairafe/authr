@@ -3,13 +3,11 @@ import axios from 'axios';
 
 export default function LandingPage(props) {
   const [finishedStories, setStories] = useState([]);
-  const [className, setClass] = useState('');
 
-  const fetchData = async classToUse => {
+  const fetchData = async () => {
     if (props.className) {
-      console.log(classToUse);
       const result = await axios.get('/api/class', {
-        data: classToUse
+        params: props.className
       });
       await setStories([
         ...result.data
@@ -25,9 +23,8 @@ export default function LandingPage(props) {
   };
 
   useEffect(() => {
-    setClass(props.className.className);
-    fetchData(props.className);
-  }, []);
+    fetchData();
+  }, [props.className]);
 
   function findElementsStory(id) {
     let storyId = null;
