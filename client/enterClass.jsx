@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 export default function EnterClass(props) {
   const [className, setClass] = useState('');
 
+  const fetchData = async () => {
+    const result = await axios.get('/api/class/id', {
+      params: {
+        className: className
+      }
+    });
+    console.log(result.data);
+    if (result.data.length === 0) {
+      console.log('no class');
+    } else {
+      props.setClass(className);
+      await props.changeView('landingPage');
+    }
+  };
+
   const handleSubmit = evt => {
     evt.preventDefault();
-    props.setClass(className);
-    props.changeView('landingPage');
+    fetchData();
   };
 
   return (
