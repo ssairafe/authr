@@ -8,7 +8,7 @@ export default function Navbar(props) {
           authr
         </h1>
       </div>
-      <button type="button" className="btn btn-outline-success align-right" onClick={() => { props.changeView('startStory'); }}>Enter A Class</button>
+      <button type="button" className="btn btn-outline-success align-right" onClick={() => { props.changeView('enterClass'); }}>Enter A Class</button>
     </nav>
   );
 }
