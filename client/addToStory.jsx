@@ -9,12 +9,21 @@ export default function AddToStory(props) {
   const [charactersRemaining, setCharachters] = useState(2500);
 
   const fetchData = async () => {
-    const result = await axios(
-      '/api/incompleteStories'
-    );
-    setStory({
-      ...result.data
-    });
+    if (props.className) {
+      const result = await axios.get('/api/incompleteStories', {
+        params: props.classID
+      });
+      await setStory({
+        ...result.data
+      });
+    } else {
+      const result = await axios(
+        '/api/incompleteStories'
+      );
+      setStory({
+        ...result.data
+      });
+    }
   };
 
   useEffect(() => {
@@ -65,7 +74,8 @@ export default function AddToStory(props) {
       data: {
         incompleteStory,
         partToAdd,
-        newAuthor
+        newAuthor,
+        className: props.className
       }
     });
     setAuthor('');
