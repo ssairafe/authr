@@ -10,11 +10,12 @@ export default function EnterClass(props) {
         className: className
       }
     });
-    console.log(result.data);
     if (result.data.length === 0) {
-      console.log('no class');
+      alert('No such class exists');
     } else {
+      let classObj = result.data[0];
       props.setClass(className);
+      props.setID(classObj.classID);
       await props.changeView('landingPage');
     }
   };
@@ -28,6 +29,12 @@ export default function EnterClass(props) {
     <>
     <div style={{ height: '6rem' }}></div>
     <div className="container-fluid">
+      <div className="row">
+        <div className="col-1">
+          <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
+        </div>
+      </div>
+      <div style={{ height: '4rem' }}></div>
       <form onSubmit={handleSubmit} id="form3">
         <label>
           Class Name:
