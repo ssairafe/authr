@@ -19,7 +19,9 @@ export default function StartStory(props) {
       method: 'post',
       url: '/api/stories',
       data: {
-        newStory
+        newStory,
+        className: props.className,
+        classID: props.classID
       }
     });
     setModul(true);
