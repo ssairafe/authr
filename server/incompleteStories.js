@@ -5,13 +5,23 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 router.get('/', jsonParser, (req, res, next) => {
-  connection.execute('SELECT * FROM `stories` WHERE stories.storyCompleted = false', (err, rows, fields) => {
-    if (err) {
-      return next(err);
-    }
-    let randomStoryIndex = Math.floor(Math.random() * rows.length);
-    res.json((rows[randomStoryIndex]));
-  });
+  if (req.query[0]) {
+    connection.execute('SELECT * FROM `stories` WHERE stories.storyCompleted = false AND stories.class = ?', [req.query[0]], (err, rows, fields) => {
+      if (err) {
+        return next(err);
+      }
+      let randomStoryIndex = Math.floor(Math.random() * rows.length);
+      res.json((rows[randomStoryIndex]));
+    });
+  } else {
+    connection.execute('SELECT * FROM `stories` WHERE stories.storyCompleted = false AND stories.class is NULL', (err, rows, fields) => {
+      if (err) {
+        return next(err);
+      }
+      let randomStoryIndex = Math.floor(Math.random() * rows.length);
+      res.json((rows[randomStoryIndex]));
+    });
+  }
 });
 
 router.patch('/', jsonParser, (req, res, next) => {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function AddToStory(props) {
   const [incompleteStory, setStory] = useState({});
@@ -10,12 +9,21 @@ export default function AddToStory(props) {
   const [charactersRemaining, setCharachters] = useState(2500);
 
   const fetchData = async () => {
-    const result = await axios(
-      '/api/incompleteStories'
-    );
-    setStory({
-      ...result.data
-    });
+    if (props.className) {
+      const result = await axios.get('/api/incompleteStories', {
+        params: props.classID
+      });
+      await setStory({
+        ...result.data
+      });
+    } else {
+      const result = await axios(
+        '/api/incompleteStories'
+      );
+      setStory({
+        ...result.data
+      });
+    }
   };
 
   useEffect(() => {
@@ -66,7 +74,8 @@ export default function AddToStory(props) {
       data: {
         incompleteStory,
         partToAdd,
-        newAuthor
+        newAuthor,
+        className: props.className
       }
     });
     setAuthor('');
@@ -81,8 +90,7 @@ export default function AddToStory(props) {
 
     return (
     <>
-      <Navbar />
-      <div style={{ height: '130px' }}></div>
+      <div style={{ height: '110px' }}></div>
         <div className="container">
           <div className="row">
             <div className="col-1">
@@ -144,7 +152,6 @@ export default function AddToStory(props) {
   } else {
     return (
     <>
-      <Navbar />
       <div style={{ height: '130px' }}></div>
       <div className="container">
         {modulOn ? modul : null}

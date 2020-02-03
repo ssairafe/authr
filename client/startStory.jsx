@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function StartStory(props) {
   const [newStory, setStory] = useState({
@@ -20,7 +19,9 @@ export default function StartStory(props) {
       method: 'post',
       url: '/api/stories',
       data: {
-        newStory
+        newStory,
+        className: props.className,
+        classID: props.classID
       }
     });
     setModul(true);
@@ -45,8 +46,7 @@ export default function StartStory(props) {
 
   return (
     <>
-      <Navbar />
-      <div style={{ height: '130px' }}></div>
+      <div style={{ height: '100px' }}></div>
       <div className="container">
         <div className="row">
           <div className="col-1">

@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from './navbar';
 
 export default function LandingPage(props) {
   const [finishedStories, setStories] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = async () => {
+    if (props.className) {
+      const result = await axios.get('/api/class', {
+        params: props.className
+      });
+      await setStories([
+        ...result.data
+      ]);
+    } else {
       const result = await axios(
         '/api/stories'
       );
       await setStories([
         ...result.data
       ]);
-    };
+    }
+  };
 
+  useEffect(() => {
     fetchData();
-  }, []);
+  }, [props.className]);
 
   function findElementsStory(id) {
     let storyId = null;
@@ -47,11 +55,12 @@ export default function LandingPage(props) {
 
   return (
       <>
-        <Navbar />
         <div style={{ height: '130px' }}></div>
         <div className="container">
           <div className="row">
-            <div className="col-3"></div>
+            <div className="col-3">
+              <img src='https://www.wpclipart.com/animals/birds/feather/feathers_2/feather_small_green.png' style={{ width: 'inherit', transform: 'rotate(270deg)' }} alt=""/>
+            </div>
             <div className="col-6" style={{ textAlign: 'center' }}>
               <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('startStory'); }}>Start Story</button>
               <br></br>
@@ -59,7 +68,9 @@ export default function LandingPage(props) {
               <br></br>
               <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('addToStory'); }}>Add to Story</button>
             </div>
-            <div className="col-3"></div>
+            <div className="col-3">
+              <img src='https://www.wpclipart.com/animals/birds/feather/feathers_2/feather_small_green.png' style={{ width: 'inherit', transform: 'rotate(360deg)' }} alt="" />
+            </div>
           </div>
           <div className="row" id='finishedStoriesRow'>
             <div className="col-12">
