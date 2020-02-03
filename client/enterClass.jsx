@@ -35,19 +35,25 @@ export default function EnterClass(props) {
         </div>
       </div>
       <div style={{ height: '4rem' }}></div>
-      <form onSubmit={handleSubmit} id="form3">
-        <label>
-          Class Name:
-          <input
-            type="text"
-            minLength='3'
-            defaultValue=""
-            onChange={e => setClass({ className: e.target.value })}
-            placeholder={'Class Name'}
-          />
-        </label>
-        <button type="submit" className="btn btn-outline-success" form="form3" value="Submit">Submit</button>
-      </form>
+      <div className="row">
+        <div className="col-2"></div>
+        <div className="col-8">
+          <form onSubmit={handleSubmit} id="form3">
+            <label>
+              <input
+                style={{ width: '100%' }}
+                type="text"
+                minLength='3'
+                defaultValue=""
+                onChange={e => setClass({ className: e.target.value })}
+                placeholder={'Class Name'}
+              />
+            </label>
+            <button type="submit" className="btn btn-outline-success" form="form3" value="Submit">Submit</button>
+          </form>
+        </div>
+        <div className="col-2"></div>
+      </div>
     </div>
     </>
   );

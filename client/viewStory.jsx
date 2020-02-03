@@ -3,7 +3,7 @@ import React from 'react';
 export default function ViewStory(props) {
   return (
     <>
-    <div style={{ height: '130px' }}></div>
+    <div style={{ height: '100px' }}></div>
     <div className="container">
       <button type="button" className="btn btn-outline-success" style={{ marginBottom: '2%' }} onClick={() => { props.changeView('landingPage'); }}>Home
       </button>

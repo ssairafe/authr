@@ -90,7 +90,7 @@ export default function AddToStory(props) {
 
     return (
     <>
-      <div style={{ height: '130px' }}></div>
+      <div style={{ height: '110px' }}></div>
         <div className="container">
           <div className="row">
             <div className="col-1">
