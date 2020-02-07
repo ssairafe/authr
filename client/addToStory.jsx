@@ -3,32 +3,51 @@ import axios from 'axios';
 
 export default function AddToStory(props) {
   const [incompleteStory, setStory] = useState({});
-  const [partToAdd, setPart] = useState('');
-  const [newAuthor, setAuthor] = useState('');
-  const [modulOn, setModul] = useState(false);
-  const [charactersRemaining, setCharachters] = useState(2500);
 
   const fetchData = async () => {
     if (props.className) {
-      const result = await axios.get('/api/incompleteStories', {
-        params: props.classID
-      });
-      await setStory({
-        ...result.data
-      });
+      try {
+        const result = await axios.get('/api/incompleteStories',
+          {
+            params: props.classID
+          });
+        await setStory({
+          ...result.data
+        });
+      } catch (error) {
+        throw error;
+      }
     } else {
-      const result = await axios(
-        '/api/incompleteStories'
-      );
-      setStory({
-        ...result.data
-      });
+      try {
+        const result = await axios.get('/api/incompleteStories');
+        await setStory({
+          ...result.data
+        });
+      } catch (error) {
+        throw error;
+      }
     }
   };
 
   useEffect(() => {
+    props.setIncomplete({});
+    setStory({});
     fetchData();
   }, []);
+
+  function acceptStory() {
+    let length = (Object.keys(incompleteStory).length - 4) / 2 + 1;
+
+    for (let i = 1; i < length; i++) {
+      if (incompleteStory['author' + i] === '' && incompleteStory['part' + i] === '') {
+        props.setPart('part' + i);
+        props.setAuthor('author' + i);
+        break;
+      }
+    }
+    props.setIncomplete(incompleteStory);
+    props.changeView('nameForm');
+  }
 
   let incompleteStoryElement =
     <div className="card incompleteStoryCard" key={incompleteStory.storyID}>
@@ -38,17 +57,6 @@ export default function AddToStory(props) {
         <p className="card-text finishedStoryPart ">{incompleteStory.part1}</p>
       </div>
     </div>;
-
-  function acceptStory() {
-    let length = (Object.keys(incompleteStory).length - 3) / 2 + 1;
-    for (let i = 0; i < length; i++) {
-      if (incompleteStory['author' + i] === '' && incompleteStory['part' + i] === '') {
-        setPart('part' + i);
-        setAuthor('author' + i);
-        break;
-      }
-    }
-  }
 
   const modul =
     <div className="container-fluid">
@@ -66,110 +74,25 @@ export default function AddToStory(props) {
       </div>
     </div>;
 
-  const handleSubmit = evt => {
-    evt.preventDefault();
-    axios({
-      method: 'patch',
-      url: '/api/incompleteStories',
-      data: {
-        incompleteStory,
-        partToAdd,
-        newAuthor,
-        className: props.className
-      }
-    });
-    setAuthor('');
-    setPart('');
-    fetchData();
-    setModul(true);
-  };
-
-  if (partToAdd !== '' && newAuthor !== '') {
-    let part = partToAdd;
-    let author = newAuthor;
-
-    return (
-    <>
-      <div style={{ height: '110px' }}></div>
+  return (
+      <>
+        <div style={{ height: '130px' }}></div>
         <div className="container">
-          <div className="row">
-            <div className="col-1">
-              <button type="button" className="btn btn-outline-success" onClick={() => { props.changeView('landingPage'); }}>Home</button>
+          {props.modulOn ? modul : null}
+          <div className="row" id='finishedStoriesRow'>
+            <div className="col-12">
+              <h1 id='finishedStoriesHeader'>Select a Story</h1>
+              {incompleteStoryElement}
             </div>
-            <div className="col-10" id="startStoryHeader"></div>
-            <div className="col-1"></div>
           </div>
           <div className="row">
-            <div className="col-1"></div>
-            <div className="col-10" id="startStoryHeader">
-              {incompleteStory.title}
-              <div id="incompleteStoryBody">
-                <p>{incompleteStory.part1}</p>
-                <p>{incompleteStory.part2}</p>
-                <p>{incompleteStory.part3}</p>
-                <p>{incompleteStory.part4}</p>
-              </div>
+            <div className="col-12">
+              <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { props.setModul(false); props.changeView('landingPage'); }}>Home</button>
+              <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { fetchData(); }}>Another Story</button>
+              <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { acceptStory(); props.setModul(false); }}>Accept Story</button>
             </div>
-            <div className="col-1"></div>
-          </div>
-          <div className="row">
-            <div className="col-1"></div>
-            <div className="col-10">
-              <form onSubmit={handleSubmit} id="form2">
-                <label>
-                  Name:
-                  <input
-                    type="text"
-                    minLength='5'
-                    defaultValue=""
-                    onChange={e => setStory({ ...incompleteStory, [author]: e.target.value })}
-                    placeholder={'First Last'}
-                  />
-                </label>
-                <label>
-                  Part
-                  <textarea
-                    maxLength='2500'
-                    minLength= '500'
-                    type="text"
-                    defaultValue=""
-                    onChange={e => {
-                      setStory({ ...incompleteStory, [part]: e.target.value });
-                      setCharachters((2500 - incompleteStory[part].length) - 1);
-                    }
-                    }
-                  />
-                </label>
-                <p>Characters Remaining:{charactersRemaining}</p>
-                <button type="submit" className="btn btn-outline-success" form="form2" value="Submit">Submit</button>
-              </form>
-            </div>
-            <div className="col-1"></div>
           </div>
         </div>
       </>
-    );
-  } else {
-    return (
-    <>
-      <div style={{ height: '130px' }}></div>
-      <div className="container">
-        {modulOn ? modul : null}
-        <div className="row" id='finishedStoriesRow'>
-          <div className="col-12">
-            <h1 id='finishedStoriesHeader'>Select a Story</h1>
-            {incompleteStoryElement}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { props.changeView('landingPage'); }}>Home</button>
-            <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { fetchData(); }}>Another Story</button>
-            <button type="button" className="btn btn-outline-success selectStoryButtons" onClick={() => { acceptStory(); }}>Accept Story</button>
-          </div>
-        </div>
-      </div>
-    </>
-    );
-  }
+  );
 }
