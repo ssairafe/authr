@@ -26,7 +26,7 @@ router.get('/', jsonParser, (req, res, next) => {
     let classId = rows[0].classID;
     connection.execute('SELECT * FROM `stories` WHERE stories.class = ? AND stories.storyCompleted = true', [classId], (err, rows, fields) => {
       if (err) return next(err);
-      res.json(rows);
+      res.json(rows.reverse());
     });
   });
 });

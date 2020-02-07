@@ -10,6 +10,12 @@ export default function StartStory(props) {
   const [modulOn, setModul] = useState(false);
   const [charactersRemaining, setCharachters] = useState(2500);
 
+  function modulTimer() {
+    setModul(true);
+    setTimeout(() => {
+      setModul(false);
+    }, 5000);
+  }
   const handleSubmit = evt => {
     evt.preventDefault();
     if (newStory.part1.length < 1) {
@@ -24,7 +30,7 @@ export default function StartStory(props) {
         classID: props.classID
       }
     });
-    setModul(true);
+    modulTimer();
     document.getElementById('form1').reset();
   };
 

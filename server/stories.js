@@ -7,7 +7,7 @@ const jsonParser = bodyParser.json();
 router.get('/', (req, res, next) => {
   connection.execute('SELECT * FROM `stories` WHERE stories.class IS NULL and stories.storyCompleted = true', (err, rows, fields) => {
     if (err) return next(err);
-    res.json(rows);
+    res.json(rows.reverse());
   });
 });
 

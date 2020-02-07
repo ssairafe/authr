@@ -5,7 +5,10 @@ export default function ViewStory(props) {
     <>
     <div style={{ height: '100px' }}></div>
     <div className="container">
-      <button type="button" className="btn btn-outline-success" style={{ marginBottom: '2%' }} onClick={() => { props.changeView('landingPage'); }}>Home
+      <button type="button" className="btn btn-outline-success" style={{ marginBottom: '2%' }} onClick={() => {
+        props.setStoryBack({});
+        props.changeView('landingPage');
+      }}>Home
       </button>
       <div className="card finishedStoryView">
         <div className="card-body">
@@ -17,7 +20,11 @@ export default function ViewStory(props) {
           <p className="card-text finishedStoryPart ">{props.story.part4}</p>
         </div>
       </div>
-      <button type="button" className="btn btn-outline-success" style={{ marginBottom: '3%' }} onClick={() => { props.changeView('landingPage'); }}>Home</button>
+      <button type="button" className="btn btn-outline-success" style={{ marginBottom: '3%' }} onClick={() => {
+        props.setStoryBack({});
+        props.changeView('landingPage');
+      }}>Home
+      </button>
     </div>
     </>
   );
