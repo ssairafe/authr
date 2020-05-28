@@ -55,6 +55,8 @@ export default function AddToStory(props) {
         <h2 className="card-title">{incompleteStory.title}</h2>
         <p className="card-text"><small className="text-muted">By: {incompleteStory.author1 + ', ' + incompleteStory.author2 + ', ' + incompleteStory.author3 + ', ' + incompleteStory.author4}</small></p>
         <p className="card-text finishedStoryPart ">{incompleteStory.part1}</p>
+        <p className="card-text finishedStoryPart ">{incompleteStory.part2}</p>
+        <p className="card-text finishedStoryPart ">{incompleteStory.part3}</p>
       </div>
     </div>;
 
